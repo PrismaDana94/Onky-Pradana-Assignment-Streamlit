@@ -48,7 +48,7 @@ def load_data():
         df.loc[mask_placeholder, 'Product'] = pd.NA
         
         # buang baris yang kebaca 'product' (header ganda)
-        df = df[~df['Product'].astype(str).str.lower().eq('product')]
+        # df = df[~df['Product'].astype(str).str.lower().eq('product')]
         
         # buang baris tanpa product
         df = df.dropna(subset=['Product']).reset_index(drop=True)
