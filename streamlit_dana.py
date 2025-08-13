@@ -30,7 +30,32 @@ def load_data():
         df['Price Each'] = pd.to_numeric(df.get('Price Each'), errors='coerce')
         df['Sales'] = df['Quantity Ordered'] * df['Price Each']
         all_frames.append(df)
-    return pd.concat(all_frames, ignore_index=True) if all_frames else pd.DataFrame()
+    # gabung semua frame
+df = pd.concat(all_frames, ignore_index=True) if all_frames else pd.DataFrame()
+
+# --- Bersihkan kolom Product (normalisasi & buang header/NaN) ---
+prod_cols = [c for c in df.columns if c.lower() == 'product']
+if prod_cols:
+    # samakan nama kolom jadi 'Product'
+    if prod_cols[0] != 'Product':
+        df.rename(columns={prod_cols[0]: 'Product'}, inplace=True)
+
+    # ubah ke string, strip spasi
+    df['Product'] = df['Product'].astype(str).str.strip()
+
+    # ubah placeholder jadi NA
+    placeholders = ['nan', 'none', 'n/a', 'na', '']
+    mask_placeholder = df['Product'].str.lower().isin(placeholders)
+    df.loc[mask_placeholder, 'Product'] = pd.NA
+
+    # buang baris yang kebaca 'product' (header ganda)
+    df = df[~df['Product'].astype(str).str.lower().eq('product')]
+
+    # buang baris tanpa product
+    df = df.dropna(subset=['Product']).reset_index(drop=True)
+
+# kembalikan df yang sudah dibersihkan
+return df
 
 # ========================
 # Load data
