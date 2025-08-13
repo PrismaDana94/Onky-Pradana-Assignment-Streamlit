@@ -26,17 +26,6 @@ def load_data():
 # Load data
 df = load_data()
 
-# Sidebar Filter
-st.sidebar.header("Filter Data")
-min_date = df['Order Date'].min()
-max_date = df['Order Date'].max()
-
-date_range = st.sidebar.date_input("Pilih Rentang Tanggal", [min_date, max_date])
-
-if len(date_range) == 2:
-    start, end = date_range
-    df = df[(df['Order Date'] >= pd.to_datetime(start)) & (df['Order Date'] <= pd.to_datetime(end))]
-
 # Profil & Judul
 st.title("Sales Analysis 2019")
 st.markdown("""
@@ -52,6 +41,14 @@ col2.metric("Total Orders", df['Order ID'].nunique())
 col3.metric("Unique Products", df['Product'].nunique())
 
 st.markdown("---")
+
+# Pilihan filter bulan
+months = sorted(df_all['month'].unique())
+selected_month = st.selectbox("Pilih Bulan", months)
+df_filtered = df_all[df_all['month'] == selected_month]
+
+st.subheader(f"Data Penjualan - {selected_month}")
+st.dataframe(df_filtered)
 
 # Grafik 1: Tren Penjualan Bulanan
 df['Month'] = df['Order Date'].dt.month
