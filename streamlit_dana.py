@@ -207,6 +207,19 @@ fig_stacked = px.bar(
 )
 st.plotly_chart(fig_stacked, use_container_width=True)
 
+# Semua produk tanpa filter
+all_products = df['Product'].dropna().unique()
+
+# Produk setelah filter
+filtered_products = df_filtered['Product'].dropna().unique()
+
+# Produk yang hilang
+missing_products = set(all_products) - set(filtered_products)
+
+print("Total produk tanpa filter:", len(all_products))
+print("Total produk setelah filter:", len(filtered_products))
+print("Produk yang hilang:", missing_products)
+
 # ========================
 # Preview Data & Download
 # ========================
