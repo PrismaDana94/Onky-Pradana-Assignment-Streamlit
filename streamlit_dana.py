@@ -37,6 +37,11 @@ def load_data():
 # ========================
 df = load_data()
 
+# === DEBUG START ===
+st.write("DEBUG RAW:", df.shape)
+st.write("DEBUG RAW Unique Products:", df['Product'].nunique())
+# === DEBUG END ===
+
 if df.empty:
     st.error("Data tidak ditemukan atau file 'sales_data_*.csv' kosong. Pastikan file tersedia di folder kerja.")
     st.stop()
@@ -111,6 +116,11 @@ if products_all:
     mask &= df['Product'].isin(selected_product)
 
 df_filtered = df[mask].copy()
+
+# === DEBUG START ===
+st.write("DEBUG FILTERED:", df_filtered.shape)
+st.write("DEBUG FILTERED Unique Products:", df_filtered['Product'].nunique())
+# === DEBUG END ===
 
 if df_filtered.empty:
     st.warning("Tidak ada data setelah diterapkan filter. Coba ubah pilihan filter.")
