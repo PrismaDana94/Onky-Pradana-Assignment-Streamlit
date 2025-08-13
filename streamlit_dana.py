@@ -113,6 +113,7 @@ def extract_city_state(address):
             return f"{city} ({state})"
     return None
 
+df_all['City'] = df_all['Purchase Address'].apply(extract_city_state)
 # ========================
 # Urutan nama bulan (kategori terurut)
 # ========================
