@@ -26,8 +26,9 @@ def load_data():
 # Load data
 df = load_data()
 
-# Tambah kolom Month & City
+# Tambah kolom Month & Month Name & City
 df['Month'] = df['Order Date'].dt.month
+df['Month Name'] = df['Order Date'].dt.strftime('%B')
 
 def get_city(address):
     if pd.notnull(address):
@@ -42,7 +43,9 @@ df['City'] = df['Purchase Address'].apply(get_city)
 
 # Sidebar Filter
 st.sidebar.header("Filter Data")
-months = sorted(df['Month'].unique())
+
+# Filter bulan pakai nama bulan dan urut sesuai kalender
+months = sorted(df['Month Name'].unique(), key=lambda x: pd.to_datetime(x, format='%B').month)
 selected_month = st.sidebar.multiselect("Pilih Bulan", months, default=months)
 
 cities = sorted(df['City'].dropna().unique())
@@ -53,7 +56,7 @@ selected_product = st.sidebar.multiselect("Pilih Produk", products, default=prod
 
 # Terapkan filter
 df_filtered = df[
-    (df['Month'].isin(selected_month)) &
+    (df['Month Name'].isin(selected_month)) &
     (df['City'].isin(selected_city)) &
     (df['Product'].isin(selected_product))
 ]
@@ -75,8 +78,12 @@ col3.metric("Unique Products", df_filtered['Product'].nunique())
 st.markdown("---")
 
 # Grafik 1: Tren Penjualan Bulanan
-monthly_sales = df_filtered.groupby('Month')['Sales'].sum().reset_index()
-fig1 = px.line(monthly_sales, x='Month', y='Sales', markers=True, title="Monthly Sales Trend")
+monthly_sales = (
+    df_filtered.groupby('Month Name')['Sales'].sum().reset_index()
+    .assign(Month_Number=lambda x: x['Month Name'].apply(lambda m: pd.to_datetime(m, format='%B').month))
+    .sort_values('Month_Number')
+)
+fig1 = px.line(monthly_sales, x='Month Name', y='Sales', markers=True, title="Monthly Sales Trend")
 st.plotly_chart(fig1, use_container_width=True)
 
 # Grafik 2: Top 10 Produk
@@ -100,10 +107,17 @@ top_products_city = df_filtered.groupby('Product')['Sales'].sum().nlargest(5).re
 fig_top_city = px.bar(top_products_city, x='Sales', y='Product', orientation='h', title="Top 5 Products in Selected Filter")
 st.plotly_chart(fig_top_city, use_container_width=True)
 
-# Grafik 6: Heatmap Bulan vs Kota
-heatmap_data = df_filtered.groupby(['Month', 'City'])['Sales'].sum().reset_index()
-fig_heatmap = px.density_heatmap(heatmap_data, x='Month', y='City', z='Sales', title="Sales Heatmap by Month and City")
-st.plotly_chart(fig_heatmap, use_container_width=True)
+# Grafik 6 (Ganti Heatmap → Stacked Bar Chart): Sales per Bulan per Kota
+fig_stacked = px.bar(
+    df_filtered,
+    x='Month Name',
+    y='Sales',
+    color='City',
+    title="Sales by City per Month",
+    barmode='stack',
+    category_orders={"Month Name": months}  # pastikan urutan sesuai
+)
+st.plotly_chart(fig_stacked, use_container_width=True)
 
 # Preview Data
 st.markdown("---")
@@ -116,3 +130,4 @@ st.download_button(
     df_filtered.to_csv(index=False),
     file_name="filtered_sales.csv"
 )
+ 
