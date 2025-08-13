@@ -56,16 +56,10 @@ df['Month Name'] = df['Order Date'].dt.strftime('%B')  # bisa NaN bila Order Dat
 # Fungsi robust untuk ekstrak City (State)
 # ========================
 def extract_city_state(address):
-    if pd.notnull(address):
-        parts = address.split(',')
-        if len(parts) >= 3:  # format normal
-            city = parts[1].strip()
-            state = parts[2].strip().split(' ')[0]
-            return f"{city} ({state})"
-    return None
-
-df_clean['City'] = df_clean['Purchase Address'].apply(extract_city_state)
-print(df_clean[['Purchase Address', 'City']].head())
+    """Coba berbagai pola untuk mendapatkan 'City (ST)' dari address string."""
+    if pd.isna(address) or str(address).strip() == "":
+        return None
+    addr = str(address).strip()
 
     # 1) pola umum: "... , City, ST 12345" atau "... , City, ST"
     m = re.search(r',\s*([^,]+),\s*([A-Za-z]{2})\b', addr)
