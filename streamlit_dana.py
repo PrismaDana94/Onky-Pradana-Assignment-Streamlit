@@ -53,8 +53,8 @@ def load_data():
         # buang baris tanpa product
         df = df.dropna(subset=['Product']).reset_index(drop=True)
 
-    # kembalikan df yang sudah dibersihkan
-    return df
+# kembalikan df yang sudah dibersihkan
+return df
 
 # ========================
 # Load data
