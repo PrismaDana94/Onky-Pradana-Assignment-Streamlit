@@ -1,9 +1,7 @@
-# app.py
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 import glob
-import re
 
 # ========================
 # Konfigurasi halaman
@@ -23,14 +21,11 @@ def load_data():
         try:
             df = pd.read_csv(file)
         except Exception:
-            # fallback encoding jika diperlukan
             df = pd.read_csv(file, encoding='latin1')
-        # parsing tanggal permissive
         if 'Order Date' in df.columns:
             df['Order Date'] = pd.to_datetime(df['Order Date'], errors='coerce', infer_datetime_format=True)
         else:
             df['Order Date'] = pd.NaT
-        # numeric columns (jika ada)
         df['Quantity Ordered'] = pd.to_numeric(df.get('Quantity Ordered'), errors='coerce')
         df['Price Each'] = pd.to_numeric(df.get('Price Each'), errors='coerce')
         df['Sales'] = df['Quantity Ordered'] * df['Price Each']
@@ -50,60 +45,29 @@ if df.empty:
 # Ekstrak kolom waktu & bulan
 # ========================
 df['Month'] = df['Order Date'].dt.month
-df['Month Name'] = df['Order Date'].dt.strftime('%B')  # bisa NaN bila Order Date invalid
+df['Month Name'] = df['Order Date'].dt.strftime('%B')
 
 # ========================
-# Fungsi robust untuk ekstrak City (State)
+# Fungsi aman untuk ekstrak City
 # ========================
 def extract_city_state(address):
-    """Coba berbagai pola untuk mendapatkan 'City (ST)' dari address string."""
+    """Ekstrak 'City (ST)' dari Purchase Address secara aman."""
     if pd.isna(address) or str(address).strip() == "":
         return None
-    addr = str(address).strip()
+    try:
+        parts = [p.strip() for p in str(address).split(',')]
+        if len(parts) >= 2:
+            city = parts[1]
+            state = ""
+            if len(parts) >= 3:
+                state_token = parts[2].split()
+                if state_token:
+                    state = state_token[0].upper()
+            return f"{city} ({state})" if state else city
+        return address
+    except Exception:
+        return None
 
-    # 1) pola umum: "... , City, ST 12345" atau "... , City, ST"
-    m = re.search(r',\s*([^,]+),\s*([A-Za-z]{2})\b', addr)
-    if m:
-        city = m.group(1).strip()
-        state = m.group(2).strip().upper()
-        return f"{city} ({state})"
-
-    # 2) pola "City, ST" (tanpa street)
-    m = re.search(r'^\s*([^,]+),\s*([A-Za-z]{2})\b', addr)
-    if m:
-        city = m.group(1).strip()
-        state = m.group(2).strip().upper()
-        return f"{city} ({state})"
-
-    # 3) pola tanpa koma: "City ST ZIP" -> capture City & ST
-    m = re.search(r'([A-Za-z\s]+)\s+([A-Za-z]{2})\s+\d{5}', addr)
-    if m:
-        city = m.group(1).strip()
-        state = m.group(2).strip().upper()
-        return f"{city} ({state})"
-
-    # 4) fallback: split by comma atau titik, gunakan bagian kedua dari belakang jika memungkinkan
-    parts = [p.strip() for p in re.split(r',|\.', addr) if p.strip()]
-    if len(parts) >= 3:
-        city = parts[-2]
-        state_token = parts[-1].split()[0]
-        if len(state_token) <= 3:
-            return f"{city} ({state_token.upper()})"
-        return city
-    if len(parts) == 2:
-        # kemungkinan "City, State" atau "Street, City"
-        first, second = parts
-        second_tok = second.split()[0]
-        if len(second_tok) <= 3:
-            return f"{first} ({second_tok.upper()})"
-        return second
-
-    # 5) terakhir, kembalikan string (lebih baik daripada error)
-    return addr
-
-# ========================
-# Buat kolom City
-# ========================
 if 'Purchase Address' in df.columns:
     df['City'] = df['Purchase Address'].apply(extract_city_state)
 elif 'City' in df.columns and 'State' in df.columns:
@@ -112,7 +76,7 @@ else:
     df['City'] = None
 
 # ========================
-# Urutan nama bulan (kategori terurut)
+# Urutan nama bulan
 # ========================
 month_order = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -126,10 +90,8 @@ if df['Month Name'].notna().any():
 # ========================
 st.sidebar.header("Filter Data")
 
-# tampilkan bulan yang ada (tetap urut berdasarkan month_order)
 present_months = [m for m in month_order if m in list(df['Month Name'].dropna().unique())]
 if not present_months:
-    # fallback: gunakan angka bulan jika Month Name tidak tersedia
     present_months = sorted(df['Month'].dropna().unique())
 
 selected_month = st.sidebar.multiselect("Pilih Bulan", present_months, default=present_months)
@@ -141,9 +103,9 @@ products_all = sorted(df['Product'].dropna().unique()) if 'Product' in df.column
 selected_product = st.sidebar.multiselect("Pilih Produk", products_all, default=products_all)
 
 # ========================
-# Terapkan filter (safe copy)
+# Terapkan filter
 # ========================
-mask = df['Month Name'].isin(selected_month) if isinstance(selected_month[0], str) or selected_month else df['Month Name'].isin(selected_month)
+mask = df['Month Name'].isin(selected_month) if selected_month else True
 mask &= df['City'].isin(selected_city)
 if products_all:
     mask &= df['Product'].isin(selected_product)
@@ -152,11 +114,10 @@ df_filtered = df[mask].copy()
 
 if df_filtered.empty:
     st.warning("Tidak ada data setelah diterapkan filter. Coba ubah pilihan filter.")
-    st.dataframe(df_filtered.head())
     st.stop()
 
 # ========================
-# Skema warna konsisten untuk kota (berdasarkan seluruh dataset)
+# Warna konsisten untuk kota
 # ========================
 city_colors = px.colors.qualitative.Plotly
 unique_cities = sorted(df['City'].dropna().unique())
@@ -167,9 +128,9 @@ city_color_map = {city: city_colors[i % len(city_colors)] for i, city in enumera
 # ========================
 st.title("Sales Analysis 2019")
 st.markdown("""
-**Nama:** Onky Pradana  
-**Project:** Analisis Penjualan Tahun 2019  
-**Kontak:** freddycull27@gmail.com
+Nama: Onky Pradana  
+Project: Analisis Penjualan Tahun 2019  
+Kontak: freddycull27@gmail.com
 """)
 
 # ========================
@@ -232,7 +193,7 @@ if 'Product' in df_filtered.columns:
     st.plotly_chart(fig_top_city, use_container_width=True)
 
 # ========================
-# Grafik 6 (Stacked Bar Chart): Sales per Bulan per Kota
+# Grafik 6: Stacked Bar Sales per Bulan per Kota
 # ========================
 fig_stacked = px.bar(
     df_filtered,
@@ -258,4 +219,3 @@ st.download_button(
     df_filtered.to_csv(index=False),
     file_name="filtered_sales.csv"
 )
-
