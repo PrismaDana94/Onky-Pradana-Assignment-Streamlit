@@ -117,6 +117,11 @@ if products_all:
 
 df_filtered = df[mask].copy()
 
+raw_p  = df['Product'].astype(str).str.strip().str.lower().unique()
+filt_p = df_filtered['Product'].astype(str).str.strip().str.lower().unique()
+missing = sorted(set(raw_p) - set(filt_p))
+st.write("Produk yang terbuang oleh filter:", missing)
+
 # === DEBUG START ===
 st.write("DEBUG FILTERED:", df_filtered.shape)
 st.write("DEBUG FILTERED Unique Products:", df_filtered['Product'].nunique())
