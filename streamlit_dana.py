@@ -62,8 +62,8 @@ def load_data():
 df = load_data()
 
 # === DEBUG START ===
-st.write("DEBUG RAW:", df.shape)
-st.write("DEBUG RAW Unique Products:", df['Product'].nunique())
+# st.write("DEBUG RAW:", df.shape)
+# st.write("DEBUG RAW Unique Products:", df['Product'].nunique())
 # === DEBUG END ===
 
 if df.empty:
@@ -147,8 +147,8 @@ missing = sorted(set(raw_p) - set(filt_p))
 st.write("Produk yang terbuang oleh filter:",missing)
 
 # === DEBUG START ===
-st.write("DEBUG FILTERED:", df_filtered.shape)
-st.write("DEBUG FILTERED Unique Products:", df_filtered['Product'].nunique())
+# st.write("DEBUG FILTERED:", df_filtered.shape)
+# st.write("DEBUG FILTERED Unique Products:", df_filtered['Product'].nunique())
 # === DEBUG END ===
 
 if df_filtered.empty:
