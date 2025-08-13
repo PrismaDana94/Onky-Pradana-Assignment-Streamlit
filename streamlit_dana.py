@@ -42,14 +42,6 @@ col3.metric("Unique Products", df['Product'].nunique())
 
 st.markdown("---")
 
-# Pilihan filter bulan
-months = sorted(df_all['month'].unique())
-selected_month = st.selectbox("Pilih Bulan", months)
-df_filtered = df_all[df_all['month'] == selected_month]
-
-st.subheader(f"Data Penjualan - {selected_month}")
-st.dataframe(df_filtered)
-
 # Grafik 1: Tren Penjualan Bulanan
 df['Month'] = df['Order Date'].dt.month
 monthly_sales = df.groupby('Month')['Sales'].sum().reset_index()
