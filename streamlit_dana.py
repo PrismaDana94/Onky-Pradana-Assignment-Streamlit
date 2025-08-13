@@ -104,16 +104,13 @@ def extract_city_state(address):
 # ========================
 # Buat kolom City
 # ========================
-def extract_city_state(address):
-    if pd.notnull(address):
-        parts = address.split(',')
-        if len(parts) >= 3:  # format normal: street, city, state zip
-            city = parts[1].strip()
-            state = parts[2].strip().split(' ')[0]  # ambil state sebelum kode pos
-            return f"{city} ({state})"
-    return None
+if 'Purchase Address' in df.columns:
+    df['City'] = df['Purchase Address'].apply(extract_city_state)
+elif 'City' in df.columns and 'State' in df.columns:
+    df['City'] = df['City'].astype(str).str.strip() + " (" + df['State'].astype(str).str.strip() + ")"
+else:
+    df['City'] = None
 
-df_all['City'] = df_all['Purchase Address'].apply(extract_city_state)
 # ========================
 # Urutan nama bulan (kategori terurut)
 # ========================
@@ -261,3 +258,4 @@ st.download_button(
     df_filtered.to_csv(index=False),
     file_name="filtered_sales.csv"
 )
+
