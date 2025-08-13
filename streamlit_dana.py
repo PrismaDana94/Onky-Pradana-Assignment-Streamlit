@@ -55,7 +55,7 @@ if prod_cols:
     df = df.dropna(subset=['Product']).reset_index(drop=True)
 
 # kembalikan df yang sudah dibersihkan
-return df
+    return df
 
 # ========================
 # Load data
