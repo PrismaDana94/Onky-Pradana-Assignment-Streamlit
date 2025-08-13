@@ -30,7 +30,7 @@ def load_data():
         df['Price Each'] = pd.to_numeric(df.get('Price Each'), errors='coerce')
         df['Sales'] = df['Quantity Ordered'] * df['Price Each']
         all_frames.append(df)
-    # gabung semua frame
+        # gabung semua frame
 df = pd.concat(all_frames, ignore_index=True) if all_frames else pd.DataFrame()
 
 # --- Bersihkan kolom Product (normalisasi & buang header/NaN) ---
@@ -56,7 +56,7 @@ if prod_cols:
 
 # kembalikan df yang sudah dibersihkan
     return df
-
+ 
 # ========================
 # Load data
 # ========================
