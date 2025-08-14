@@ -264,7 +264,9 @@ Aktivitas penjualan terendah terjadi pada dini hari pukul 3-4 dengan nilai kuran
 
 Penjualan mulai meningkat signifikan sejak pukul 8 pagi, 
 
-mencapai puncak pertama pada pukul 11 Siang yaitu sebesar (~$2,4M) dan puncak kedua pada pukul 19 malam sebesar (~$2,5M).
+mencapai puncak pertama pada pukul 11 Siang yaitu sebesar (~$2,4M) 
+
+dan puncak kedua pada pukul 19 malam sebesar (~$2,5M).
 
 Pola ini menunjukkan bahwa jam kerja pagi hingga malam hari adalah periode paling potensial untuk menjalankan promosi dan meningkatkan penawaran produk.
 """)
@@ -283,7 +285,9 @@ st.markdown("""
 **Insight:** 
 Pada filter yang dipilih, **Macbook Pro Laptop** mendominasi penjualan dengan nilai sekitar ($8M), 
 
-diikuti oleh **iPhone** (~$4,8M) dan **ThinkPad Laptop** (~$4,2M).
+diikuti oleh **iPhone** (~$4,8M) dan 
+
+**ThinkPad Laptop** (~$4,2M).
 
 Fokus promosi pada produk-produk ini berpotensi memberikan kontribusi signifikan terhadap total penjualan dalam segmen yang difilter.
 """)
