@@ -168,8 +168,10 @@ city_color_map = {city: city_colors[i % len(city_colors)] for i, city in enumera
 st.title("Sales Analysis 2019")
 st.markdown("""
 Nama: Onky Pradana  
+Bio :  Data Science enthusiast with a background in accounting, focusing on data analysis & visualization
 Project: Analisis Penjualan Tahun 2019  
 Kontak: freddycull27@gmail.com
+GitHub: [Klik di sini](https://github.com/PrismaDana94/Onky-Pradana-Assignment-Streamlit)
 """)
 
 # ========================
