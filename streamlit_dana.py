@@ -198,13 +198,14 @@ monthly_sales = (
 fig1 = px.line(monthly_sales, x='Month Name', y='Sales', markers=True, title="Monthly Sales Trend")
 st.plotly_chart(fig1, use_container_width=True)
 
-    # Insight
-    st.markdown("""
-    **Insight:** Penjualan mengalami tren naik pada awal tahun dan mencapai puncak pertama di bulan April sekitar $3,4M. 
-    Setelah itu terjadi penurunan hingga titik terendah di September ($2,1M). 
-    Mulai Oktober penjualan kembali meningkat tajam, dengan puncak tertinggi pada Desember ($4,5M), 
-    kemungkinan dipengaruhi oleh momen liburan akhir tahun dan promosi besar-besaran.
-    """)
+# Insight
+st.markdown("""
+**Insight:** 
+Penjualan mengalami tren naik pada awal tahun dan mencapai puncak pertama di bulan April sekitar $3,4M. 
+Setelah itu terjadi penurunan hingga titik terendah di September ($2,1M). 
+Mulai Oktober penjualan kembali meningkat tajam, dengan puncak tertinggi pada Desember ($4,5M), 
+kemungkinan dipengaruhi oleh momen liburan akhir tahun dan promosi besar-besaran.
+""")
 
 # ========================
 # Grafik 2: Top 10 Produk
@@ -214,13 +215,14 @@ if 'Product' in df_filtered.columns:
     fig2 = px.bar(top_products, x='Sales', y='Product', orientation='h', title="Top 10 Products by Sales")
     st.plotly_chart(fig2, use_container_width=True)
 
-    # Insight
-    st.markdown("""
-    **Insight:** Produk dengan penjualan tertinggi adalah **Macbook Pro Laptop** dengan total penjualan sekitar $8M,
-    diikuti oleh **iPhone** (~$5M) dan **ThinkPad Laptop** (~$4,2M).  
-    Dominasi produk elektronik dan gadget menunjukkan bahwa kategori ini menjadi penyumbang pendapatan terbesar.
-    Strategi promosi dan persediaan dapat difokuskan pada produk-produk unggulan ini untuk memaksimalkan profit.
-    """)
+# Insight
+st.markdown("""
+**Insight:** 
+Produk dengan penjualan tertinggi adalah **Macbook Pro Laptop** dengan total penjualan sekitar $8M,
+diikuti oleh **iPhone** (~$5M) dan **ThinkPad Laptop** (~$4,2M).  
+Dominasi produk elektronik dan gadget menunjukkan bahwa kategori ini menjadi penyumbang pendapatan terbesar.
+Strategi promosi dan persediaan dapat difokuskan pada produk-produk unggulan ini untuk memaksimalkan profit.
+""")
 
 # ========================
 # Grafik 3: Penjualan per Kota
@@ -230,13 +232,14 @@ fig3 = px.bar(city_sales, x='City', y='Sales', title="Sales by City",
               color='City', color_discrete_map=city_color_map)
 st.plotly_chart(fig3, use_container_width=True)
 
-    # Insight
-    st.markdown("""
-    **Insight:** Kota dengan penjualan tertinggi adalah **San Francisco (CA)** dengan total lebih dari $8M, 
-    jauh melampaui kota-kota lain seperti **Los Angeles (CA)** (~$5,4M) dan **New York City (NY)** (~$4,7M).  
-    Dominasi San Francisco menunjukkan potensi pasar yang besar di wilayah ini, sehingga strategi pemasaran dan distribusi
-    dapat difokuskan untuk mempertahankan dan meningkatkan pangsa pasar di kota ini.
-    """)
+# Insight
+st.markdown("""
+**Insight:**
+Kota dengan penjualan tertinggi adalah **San Francisco (CA)** dengan total lebih dari $8M, 
+jauh melampaui kota-kota lain seperti **Los Angeles (CA)** (~$5,4M) dan **New York City (NY)** (~$4,7M).  
+Dominasi San Francisco menunjukkan potensi pasar yang besar di wilayah ini, sehingga strategi pemasaran dan distribusi
+dapat difokuskan untuk mempertahankan dan meningkatkan pangsa pasar di kota ini.
+""")
 
 # ========================
 # Grafik 4: Sales per Jam
@@ -246,14 +249,15 @@ hourly_sales = df_filtered.groupby('Hour')['Sales'].sum().reset_index()
 fig_hour = px.line(hourly_sales, x='Hour', y='Sales', markers=True, title="Sales by Hour")
 st.plotly_chart(fig_hour, use_container_width=True)
 
-    # Insight
-    st.markdown("""
-    **Insight:** Aktivitas penjualan terendah terjadi pada dini hari pukul 3-4 dengan nilai kurang dari $0,2M.  
-    Penjualan mulai meningkat signifikan sejak pukul 8 pagi, mencapai puncak pertama pada pukul 11 siang (~$2,4M) 
-    dan puncak kedua pada pukul 19 malam (~$2,5M).  
-    Pola ini menunjukkan bahwa jam kerja pagi hingga malam hari adalah periode paling potensial untuk menjalankan promosi
-    dan meningkatkan penawaran produk.
-    """)
+# Insight
+st.markdown("""
+**Insight:** 
+Aktivitas penjualan terendah terjadi pada dini hari pukul 3-4 dengan nilai kurang dari $0,2M.  
+Penjualan mulai meningkat signifikan sejak pukul 8 pagi, mencapai puncak pertama pada pukul 11 siang (~$2,4M) 
+dan puncak kedua pada pukul 19 malam (~$2,5M).  
+Pola ini menunjukkan bahwa jam kerja pagi hingga malam hari adalah periode paling potensial untuk menjalankan promosi
+dan meningkatkan penawaran produk.
+""")
 
 # ========================
 # Grafik 5: Produk Terlaris di Filter Terpilih
@@ -264,13 +268,14 @@ if 'Product' in df_filtered.columns:
                           title="Top 5 Products in Selected Filter")
     st.plotly_chart(fig_top_city, use_container_width=True)
 
-    # Insight
-    st.markdown("""
-    **Insight:** Pada filter yang dipilih, **Macbook Pro Laptop** mendominasi penjualan dengan nilai sekitar $8M, 
-    diikuti oleh **iPhone** (~$4,8M) dan **ThinkPad Laptop** (~$4,2M).  
-    Fokus promosi pada produk-produk ini berpotensi memberikan kontribusi signifikan terhadap total penjualan
-    dalam segmen yang difilter.
-    """)
+# Insight
+st.markdown("""
+**Insight:** 
+Pada filter yang dipilih, **Macbook Pro Laptop** mendominasi penjualan dengan nilai sekitar $8M, 
+diikuti oleh **iPhone** (~$4,8M) dan **ThinkPad Laptop** (~$4,2M).  
+Fokus promosi pada produk-produk ini berpotensi memberikan kontribusi signifikan terhadap total penjualan
+dalam segmen yang difilter.
+""")
 
 # ========================
 # Grafik 6: Stacked Bar Sales per Bulan per Kota
@@ -287,15 +292,16 @@ fig_stacked = px.bar(
 )
 st.plotly_chart(fig_stacked, use_container_width=True)
 
-    # Insight
-    st.markdown("""
-    **Insight:** Penjualan bulanan menunjukkan kontribusi terbesar berasal dari **San Francisco (CA)** hampir di setiap bulan, 
-    terutama pada April dan Desember yang mencapai puncak penjualan tahunan.  
-    Kota lain seperti **Los Angeles (CA)** dan **New York City (NY)** juga konsisten memberikan kontribusi signifikan, 
-    sementara kota-kota lainnya memiliki volume penjualan yang lebih kecil dan cenderung stabil sepanjang tahun.  
-    Pola ini menunjukkan pentingnya mempertahankan performa di kota-kota utama sambil mencari strategi untuk 
-    meningkatkan kontribusi dari kota dengan penjualan rendah.
-    """)
+# Insight
+st.markdown("""
+**Insight:**
+Penjualan bulanan menunjukkan kontribusi terbesar berasal dari **San Francisco (CA)** hampir di setiap bulan, 
+terutama pada April dan Desember yang mencapai puncak penjualan tahunan.  
+Kota lain seperti **Los Angeles (CA)** dan **New York City (NY)** juga konsisten memberikan kontribusi signifikan, 
+sementara kota-kota lainnya memiliki volume penjualan yang lebih kecil dan cenderung stabil sepanjang tahun.  
+Pola ini menunjukkan pentingnya mempertahankan performa di kota-kota utama sambil mencari strategi untuk 
+meningkatkan kontribusi dari kota dengan penjualan rendah.
+""")
 
 # Rekomendasi Aksi
 st.markdown("""
