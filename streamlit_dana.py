@@ -221,7 +221,9 @@ st.markdown("""
 **Insight:** 
 Produk dengan penjualan tertinggi adalah **Macbook Pro Laptop** dengan total penjualan sekitar ($8M), 
 
-diikuti oleh **iPhone** sebesar (~$5M) dan **ThinkPad Laptop** (~$4,2M).
+diikuti oleh **iPhone** sebesar (~$5M) dan 
+
+**ThinkPad Laptop** (~$4,2M). 
 
 Dominasi produk elektronik dan gadget menunjukkan bahwa kategori ini menjadi penyumbang pendapatan terbesar.
 
@@ -260,8 +262,9 @@ st.markdown("""
 **Insight:** 
 Aktivitas penjualan terendah terjadi pada dini hari pukul 3-4 dengan nilai kurang dari ($0,2M). 
 
-Penjualan mulai meningkat signifikan sejak pukul 8 pagi, mencapai puncak pertama pada pukul 11 Siang yaitu sebesar (~$2,4M) dan 
-puncak kedua pada pukul 19 malam sebesar (~$2,5M).
+Penjualan mulai meningkat signifikan sejak pukul 8 pagi, 
+
+mencapai puncak pertama pada pukul 11 Siang yaitu sebesar (~$2,4M) dan puncak kedua pada pukul 19 malam sebesar (~$2,5M).
 
 Pola ini menunjukkan bahwa jam kerja pagi hingga malam hari adalah periode paling potensial untuk menjalankan promosi dan meningkatkan penawaran produk.
 """)
