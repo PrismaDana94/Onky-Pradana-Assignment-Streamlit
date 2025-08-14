@@ -216,7 +216,8 @@ if 'Product' in df_filtered.columns:
 # Insight
 st.markdown("""
 **Insight:** 
-Produk dengan penjualan tertinggi adalah **Macbook Pro Laptop** dengan total penjualan sekitar $8M,diikuti oleh **iPhone**(~$5M) dan **ThinkPad Laptop** (~$4,2M).Dominasi produk elektronik dan gadget menunjukkan bahwa kategori ini menjadi penyumbang pendapatan terbesar.
+Produk dengan penjualan tertinggi adalah **Macbook Pro Laptop** dengan total penjualan sekitar $8M,diikuti oleh **iPhone**(~$5M) 
+dan **ThinkPad Laptop** (~$4,2M).Dominasi produk elektronik dan gadget menunjukkan bahwa kategori ini menjadi penyumbang pendapatan terbesar.
 Strategi promosi dan persediaan dapat difokuskan pada produk-produk unggulan ini untuk memaksimalkan profit.
 """)
 
