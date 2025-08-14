@@ -198,6 +198,14 @@ monthly_sales = (
 fig1 = px.line(monthly_sales, x='Month Name', y='Sales', markers=True, title="Monthly Sales Trend")
 st.plotly_chart(fig1, use_container_width=True)
 
+# Insight
+st.markdown("""
+**Insight:** Penjualan mengalami tren naik pada awal tahun dan mencapai puncak pertama di bulan April sekitar $3,4M. 
+Setelah itu terjadi penurunan hingga titik terendah di September ($2,1M). 
+Mulai Oktober penjualan kembali meningkat tajam, dengan puncak tertinggi pada Desember ($4,5M), 
+kemungkinan dipengaruhi oleh momen liburan akhir tahun dan promosi besar-besaran.
+""")
+
 # ========================
 # Grafik 2: Top 10 Produk
 # ========================
