@@ -202,7 +202,9 @@ st.plotly_chart(fig1, use_container_width=True)
 st.markdown("""
 **Insight:** 
 Penjualan mengalami tren naik pada awal tahun dan mencapai puncak pertama di bulan April sekitar ($3,4M).
+
 Setelah itu terjadi penurunan hingga titik terendah di bulan September sebesar ($2,1M). 
+
 Mulai Oktober penjualan kembali meningkat tajam, dengan puncak tertinggi pada Desember ($4,5M), kemungkinan dipengaruhi oleh momen liburan akhir tahun dan promosi besar-besaran.
 """)
 
@@ -217,8 +219,12 @@ if 'Product' in df_filtered.columns:
 # Insight
 st.markdown("""
 **Insight:** 
-Produk dengan penjualan tertinggi adalah **Macbook Pro Laptop** dengan total penjualan sekitar ($8M), diikuti oleh **iPhone** sebesar (~$5M) 
-dan **ThinkPad Laptop** (~$4,2M).Dominasi produk elektronik dan gadget menunjukkan bahwa kategori ini menjadi penyumbang pendapatan terbesar.
+Produk dengan penjualan tertinggi adalah **Macbook Pro Laptop** dengan total penjualan sekitar ($8M), 
+
+diikuti oleh **iPhone** sebesar (~$5M) dan **ThinkPad Laptop** (~$4,2M).
+
+Dominasi produk elektronik dan gadget menunjukkan bahwa kategori ini menjadi penyumbang pendapatan terbesar.
+
 Strategi promosi dan persediaan dapat difokuskan pada produk-produk unggulan ini untuk memaksimalkan profit.
 """)
 
@@ -233,8 +239,12 @@ st.plotly_chart(fig3, use_container_width=True)
 # Insight
 st.markdown("""
 **Insight:**
-Kota dengan penjualan tertinggi adalah **San Francisco (CA)** dengan total lebih dari ($8M), jauh melampaui kota-kota lain seperti **Los Angeles (CA)** sebesar 
-(~$5,4M) dan **New York City (NY)** (~$4,7M).Dominasi San Francisco menunjukkan potensi pasar yang besar di wilayah ini, sehingga strategi pemasaran dan distribusi dapat difokuskan untuk mempertahankan dan meningkatkan pangsa pasar di kota ini.
+Kota dengan penjualan tertinggi adalah **San Francisco (CA)** dengan total lebih dari ($8M), 
+
+jauh melampaui kota-kota lain seperti **Los Angeles (CA)** sebesar 
+(~$5,4M) dan 
+
+**New York City (NY)** (~$4,7M).Dominasi San Francisco menunjukkan potensi pasar yang besar di wilayah ini, sehingga strategi pemasaran dan distribusi dapat difokuskan untuk mempertahankan dan meningkatkan pangsa pasar di kota ini.
 """)
 
 # ========================
@@ -249,8 +259,11 @@ st.plotly_chart(fig_hour, use_container_width=True)
 st.markdown("""
 **Insight:** 
 Aktivitas penjualan terendah terjadi pada dini hari pukul 3-4 dengan nilai kurang dari ($0,2M). 
+
 Penjualan mulai meningkat signifikan sejak pukul 8 pagi, mencapai puncak pertama pada pukul 11 Siang yaitu sebesar (~$2,4M) dan 
-puncak kedua pada pukul 19 malam sebesar (~$2,5M).Pola ini menunjukkan bahwa jam kerja pagi hingga malam hari adalah periode paling potensial untuk menjalankan promosi dan meningkatkan penawaran produk.
+puncak kedua pada pukul 19 malam sebesar (~$2,5M).
+
+Pola ini menunjukkan bahwa jam kerja pagi hingga malam hari adalah periode paling potensial untuk menjalankan promosi dan meningkatkan penawaran produk.
 """)
 
 # ========================
@@ -265,7 +278,10 @@ if 'Product' in df_filtered.columns:
 # Insight
 st.markdown("""
 **Insight:** 
-Pada filter yang dipilih, **Macbook Pro Laptop** mendominasi penjualan dengan nilai sekitar ($8M), diikuti oleh **iPhone** (~$4,8M) dan **ThinkPad Laptop** (~$4,2M).
+Pada filter yang dipilih, **Macbook Pro Laptop** mendominasi penjualan dengan nilai sekitar ($8M), 
+
+diikuti oleh **iPhone** (~$4,8M) dan **ThinkPad Laptop** (~$4,2M).
+
 Fokus promosi pada produk-produk ini berpotensi memberikan kontribusi signifikan terhadap total penjualan dalam segmen yang difilter.
 """)
 
