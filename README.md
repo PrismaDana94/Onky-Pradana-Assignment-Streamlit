@@ -108,7 +108,7 @@ Kolom utama:
   ## 📬 Author
 👤 **Onky Pradana**  
 - 📧 Email: [freddycull27@gmail.com]  
-- 💼 LinkedIn:[your_linkedin](https://www.linkedin.com/in/prisma-dana/)  
+- 💼 LinkedIn:[PrismaDana_linkedin](https://www.linkedin.com/in/prisma-dana/)  
 - 🐙 GitHub: [PrismaDana94](https://github.com/PrismaDana94)
 
 ---
