@@ -60,8 +60,8 @@ Kolom utama:
 - ✅ Data Filtering – Filter dinamis berdasarkan bulan atau kota
 - ✅ Insights & Recommendations – Kesimpulan dan rekomendasi bisnis
 - ✅ Data Preview - Tabel transaksi agregat/raw untuk verifikasi
-
-🔗 Live App[(https://onky-pradana-assignment-app-sales2019.streamlit.app/)] → E-Commerce Sales Dashboard
+  
+🔗 **Live App** → [Streamlit Dashboard](https://onky-pradana-assignment-app-sales2019.streamlit.app/)→ E-Commerce Sales Dashboard
 
 🛠 Tech Stack
 - Python (Pandas, NumPy, Matplotlib, Seaborn)
