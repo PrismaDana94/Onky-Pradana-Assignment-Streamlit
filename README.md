@@ -1,4 +1,7 @@
 🛒 E-Commerce Sales Dashboard 2019
+[![Streamlit App](https://img.shields.io/badge/Streamlit-Live%20Demo-brightgreen)](https://onky-pradana-assignment-app-sales2019.streamlit.app/)
+
+## 📌 Project Overview
 
 📌 Project Overview
 
